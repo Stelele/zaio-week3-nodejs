@@ -15,14 +15,14 @@ var Todo = mongoose.model('Todo', todoSchema)
 var urlencoder = bodyParser.urlencoded({extended:false})
 
 module.exports = function(app){
-    app.get('/todo',function(req, res){
+    app.get('/',function(req, res){
         Todo.find({}, function(err, data){
             if(err) throw err
             res.render('todo', {todos: data})
         })
     })
 
-    app.post('/todo', urlencoder, function(req,res){
+    app.post('/', urlencoder, function(req,res){
         //get data from view and add it to mongodb
 
         var newTodo = Todo(req.body).save(function(err, data){
@@ -33,7 +33,7 @@ module.exports = function(app){
         
     })
 
-    app.delete('/todo/:item', function(req, res){
+    app.delete('/:item', function(req, res){
         Todo.find({item : req.params.item.replace(/\-/g," ")}).remove(function(err,data){
             if(err) throw err
             res.json(data)
