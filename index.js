@@ -1,5 +1,5 @@
 var express = require('express')
-var toDoController = require('./controllers/toDoController')
+var toDoController = require( __dirname +'/controllers/toDoController')
 
 var app = express()
 
@@ -7,7 +7,7 @@ var app = express()
 app.set('view engine','ejs')
 
 //static files
-app.use('/assets',express.static('./assets'))
+app.use('/assets',express.static(__dirname +'/assets'))
 
 //fire controlers
 toDoController(app)
